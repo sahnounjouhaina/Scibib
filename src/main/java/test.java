@@ -18,6 +18,7 @@ public class test {
     public static void main(String[] args) throws IOException {
     	Api api = null ;
         Set<Author> authorSet = new HashSet<>();
+        Set<Publication> publicationList = new HashSet<>();
 
 
 //        api = new DblpApi();
@@ -32,29 +33,23 @@ public class test {
 
 //
 
-//    	api = new DblpApi();
-//        Set<Publication> publicationList =  api.getPublicationsByTitle("covid");
-//        System.out.println("**************************** DISPLAY RESULT (getPublicationsByTitle) ***********************");
-//        publicationList.forEach(publication -> System.out.println(publication.getTitle()));
-//        publicationList.forEach(System.out::println);
-
+    	api = new DblpApi();
+        publicationList.addAll(api.getPublicationsByTitle("covid"));
     	api = new GSApi();
-        Set<Publication> publicationList =  api.getPublicationsByTitle("covid");
+        publicationList.addAll(api.getPublicationsByTitle("covid"));
+        System.out.println("********************************************************************************************");
         System.out.println("**************************** DISPLAY RESULT (getPublicationsByTitle) ***********************");
+        System.out.println("********************************************************************************************");
         publicationList.forEach(publication -> System.out.println(publication.getTitle()));
-//        publicationList.forEach(System.out::println);
 
-
-
-//
-//        api = new DblpApi();
-//        authorSet.addAll(api.getAuthorsByName("Pas"));
-//        api = new GSApi();
-//        authorSet.addAll(api.getAuthorsByName("Pas"));
-//        System.out.println("********************************************************************************************");
-//        System.out.println("**************************** DISPLAY RESULT (getPublicationsByTitle) ***********************");
-//        System.out.println("********************************************************************************************");
-//        authorSet.forEach(author -> System.out.println(author.getFullName()));
+        api = new DblpApi();
+        authorSet.addAll(api.getAuthorsByName("Pas"));
+        api = new GSApi();
+        authorSet.addAll(api.getAuthorsByName("Pas"));
+        System.out.println("********************************************************************************************");
+        System.out.println("**************************** DISPLAY RESULT (getAuthorsByName) ***********************");
+        System.out.println("********************************************************************************************");
+        authorSet.forEach(author -> System.out.println(author.getFullName()));
     }
 	
 }
