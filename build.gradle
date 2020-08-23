@@ -28,6 +28,7 @@ dependencies {
 
 }
 application {
+//    mainClassName = project.hasProperty("mainClass") ? getProperty("mainClass") : "NULL"
     mainClassName = 'scibib.App'
 }
 tasks.withType(JavaCompile) {

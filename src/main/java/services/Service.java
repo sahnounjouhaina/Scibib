@@ -38,35 +38,35 @@ public class Service {
             }
             in.close();
             conn.disconnect();
-            System.out.println(input.toString());
+//            System.out.println(input.toString());
             return input.toString();
 	}
 
 
-	public void getHTML(String endPoint){
-	    String html = "" ;
-        URL url;
-
-        try {
-            url = new URL(endPoint);
-            URLConnection conn = url.openConnection();
-
-            // open the stream and put it into BufferedReader
-            BufferedReader br = new BufferedReader(
-                    new InputStreamReader(conn.getInputStream()));
-
-            String inputLine;
-            while ((inputLine = br.readLine()) != null) {
-                System.out.println(inputLine);
-            }
-            br.close();
-
-            System.out.println("Done");
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//	public void getHTML(String endPoint){
+//	    String html = "" ;
+//        URL url;
+//
+//        try {
+//            url = new URL(endPoint);
+//            URLConnection conn = url.openConnection();
+//
+//            // open the stream and put it into BufferedReader
+//            BufferedReader br = new BufferedReader(
+//                    new InputStreamReader(conn.getInputStream()));
+//
+//            String inputLine;
+//            while ((inputLine = br.readLine()) != null) {
+//                System.out.println(inputLine);
+//            }
+//            br.close();
+//
+//            System.out.println("Done");
+//
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

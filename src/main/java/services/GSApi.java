@@ -22,14 +22,8 @@ public class GSApi extends Service implements Api {
     private static Logger logger = Logger.getLogger(GSApi.class);
 
 
-    private final String bastApi = "https://scholar.google.com";
-    private final String PublicationEndPoint = "https://dblp.org/search/publ/api?";
+    private final String baseApi = "https://scholar.google.com";
     private final String authorEndPoint = "https://scholar.google.com/scholar?q=";
-    private final String venueEndPoint = "https://dblp.org/search/venue/api?";
-
-    private Gson gson = new GsonBuilder()
-            .serializeNulls()
-            .create();
 
     @Override
     public Set<Author> getAuthorsByName(String name) {
@@ -42,20 +36,20 @@ public class GSApi extends Service implements Api {
 //                System.out.println(newsHeadlines.attr("href"));
                 String targetURL = userProfile.select("a").attr("href");
 
-                doc = Jsoup.connect(bastApi+targetURL).get();
+                doc = Jsoup.connect(baseApi +targetURL).get();
                 Element fullNameElement = doc.select("#gsc_prf_in").first();
                 Element professionElement = doc.select(".gsc_prf_il").first();
                 Element domainesElement = doc.select("#gsc_prf_int").first();
                 Map<String,String> domaines = new HashMap<>();
                 for (Element domaineElement : domainesElement.children()) {
-                    System.out.println(domaineElement.toString());
-                    System.out.println(domaineElement.attr("href"));
+//                    System.out.println(domaineElement.toString());
+//                    System.out.println(domaineElement.attr("href"));
                     domaines.put(domaineElement.text(),domaineElement.attr("href"));
                 }
                 Elements articlesElement = doc.select(".gsc_a_tr");
                 for (Element articleElement : articlesElement) {
-                    System.out.println(articleElement.toString());
-                    System.out.println(articleElement.attr("href"));
+//                    System.out.println(articleElement.toString());
+//                    System.out.println(articleElement.attr("href"));
                 }
                 authorList.add(new GSAuthorAdabter(new GSAuthor(null,fullNameElement.text(),professionElement.text(),domaines)));
 
@@ -66,7 +60,7 @@ public class GSApi extends Service implements Api {
         } catch (Exception e) {
             System.out.println("Exception : " + e);
         }
-        return null;
+        return Collections.EMPTY_SET;
     }
 
     @Override
@@ -91,7 +85,8 @@ public class GSApi extends Service implements Api {
 //                    System.out.println(articleElement.toString());
 //                    System.out.println(articleElement.attr("href"));
 //                }
-                publicationSet.add(new GSPublicationAdabter(new GSPublication(null,null,publicationTitle.select("a").first().text(),null)));
+                if(ttt != null)
+                publicationSet.add(new GSPublicationAdabter(new GSPublication(null,null,ttt.text(),null)));
 
             }
 
@@ -99,7 +94,7 @@ public class GSApi extends Service implements Api {
         } catch (Exception e) {
             System.out.println("Exception : " + e);
         }
-        return null;
+        return Collections.EMPTY_SET;
     }
 
 
