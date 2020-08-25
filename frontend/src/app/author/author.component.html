@@ -1,0 +1,62 @@
+<div class="container h-100">
+    <div class="d-flex justify-content-center h-100">
+      <div class="searchbar">
+        <input class="search_input" type="text"  placeholder="Search..." [(ngModel)]="defaultSearch">
+        <button class="search_icon" (click)="getAuthorByName(defaultSearch)" ><i class="fa fa-search"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel-primary mt-4">
+    <div class="panel-heading">
+      <h2>Author List - search result of <p class="font-weight-bold">{{defaultSearch}}</p></h2>
+    </div>
+    <div class="panel-body table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>Full Name</th>
+            <th>domaines</th>
+            <th>Email</th>
+            <th>IndiceH</th>
+            <th>IndiceI10</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Citation</th>
+            <th style="width: 50%;">Publications</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let author of authors | async">
+            <td>{{author.id}}</td>
+            <td>
+                <a href="{{author.url}}" target="_blank">
+                    {{author.fullName}}
+                </a>
+
+            </td>
+            <td>
+                <a *ngFor="let item of author.domaines| keyvalue" href="{{item.value}}" target="_blank">
+                    {{ item.key }} 
+                </a>
+            </td>
+           
+            <td>{{author.email}}</td>
+            <td>{{author.indiceH}}</td>
+            <td>{{author.indiceO10}}</td>
+            <td>{{author.firstName}}</td>
+            <td>{{author.lastName}}</td>
+            <td>{{author.citations}}</td>
+            <td>
+                <ul *ngFor="let items of author.publications"  class="list-group" >
+                    <li class="list-group-item list-group-item-primary" *ngFor="let item of items| keyvalue | slice:2:3; let i = index;">
+                        {{ item.value }} 
+                    </li>
+                </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
